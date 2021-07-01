@@ -1,7 +1,7 @@
 Aplikasi ini merupakan sebuah aplikasi web e-commerce.
-Seorang user dapat memiliki 1 diantara 2 role yang berbeda:
-1. administrator.
-2. user (secara default).
+Seorang pengguna aplikasi ini dapat diassign satu role dari role yang berbeda-beda (secara default ada 2 role) dan akan diassign role 'user' secara default:
+1. user (default).
+2. administrator.
 
 Untuk mengakses akun admin, gunakan username dan password berikut.
   username: admin
@@ -12,6 +12,8 @@ Seorang admin memiliki fitur:
 + Mengubah data user secara manual
 + Mengubah role user lain
 + Menghapus user
++ Menambah role baru
++ Menghapus role yang telah dibuat
 + Bebas mengakses halaman di folder admin maupun pages
 + Logout
 
@@ -32,3 +34,5 @@ Seorang user tidak bisa :
 - Mengubah profile user lain
 - Mengubah role user lain
 - Menghapus user lain
+- Menambah role baru
+- Menghapus role yang telah dibuat
