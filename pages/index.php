@@ -109,9 +109,12 @@ if(isset($_POST["submit"])) {
                   <li class="d-block"><a href="profile.php" class="dropdown-item text-reset">Your Profile</a></li>
                   <li class="d-block"><a href="edit_profile.php" class="dropdown-item text-reset">Edit Profile</a></li>
                   <?php if (isset($_SESSION["administrator"])) : ?>
-                  <li class="d-block"><a href="../admin/index.php" class="dropdown-item text-reset">Go to Dashboard</a></li>
+                  <li class="d-block"><a href="../admin/index.php" class="dropdown-item text-reset">Go to Dashboard</a>
+                  </li>
                   <?php endif; ?>
-                  <li class="d-block"><div class="dropdown-divider"></div></li>
+                  <li class="d-block">
+                    <div class="dropdown-divider"></div>
+                  </li>
                   <li class="d-block"><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
                 </ul>
               </li>
@@ -184,7 +187,7 @@ if(isset($_POST["submit"])) {
 
 
   <!-- Features Section -->
-  <div class="container">
+  <div class="container min-vh-100">
     <div class="row p-3 p-md-5 mb-5 text-white" id="features">
       <div class="col-12 col-md-6 text-center overflow-hidden">
         <div class="my-3 p-3">
@@ -248,37 +251,37 @@ if(isset($_POST["submit"])) {
 
 
   <!-- Get Started -->
-  <div class="container h-100 py-5" id="getstarted" class="text-white">
-    <div class="row d-flex h-100 justify-content-between align-content-center">
+  <div class="container min-vh-100 py-5 px-4" id="getstarted" class="text-white">
+    <div class="row d-flex justify-content-between align-content-center py-4 my-4">
 
-      <div class="col-12 col-md-6 text-center overflow-hidden">
+      <div class="col-12 col-md-7 text-center mb-3 py-5">
         <div class="m-auto project-tile project-tile-lg">
-          <img src="../img/keyboard4.jpg" class="project-image project-image-lg">
+          <img src="../img/keyboard4.jpg" class="project-image">
           <div class="project-desc">
             <p class="lead fs-3">Get yours now!</p>
           </div>
         </div>
       </div>
 
-      <div class="col-12 col-md-6">
-        <!-- Form Title -->
-        <div class="mb-4">
+      <!-- Form -->
+      <div class="col-12 col-md-5 py-5 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
+
+        <div class="mb-3">
           <p class="lead display-5 text-white">Get Started!</p>
         </div>
 
-        <!-- Form -->
-        <form action="#" method="post">
-          <div class="form-floating mb-4 w-75">
+        <form action="#" method="post" class="w-100 pe-lg-4">
+          <div class="form-floating mb-4">
             <input type="text" class="form-control form-control-lg" id="floatingInput" name="username"
               placeholder="Username" required>
             <label for="floatingInput" class="text-muted">Username</label>
           </div>
-          <div class="form-floating mb-4 w-75">
+          <div class="form-floating mb-4">
             <input type="password" class="form-control form-control-lg" id="floatingPassword" name="userpass"
               placeholder="Password" required>
             <label for="floatingPassword" class="text-muted">Password</label>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg" name="submit">Register</button>
+          <button type="submit" class="btn btn-primary btn-lg w-100" name="submit">Register</button>
         </form>
       </div>
 

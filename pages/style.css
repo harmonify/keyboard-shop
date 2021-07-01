@@ -142,11 +142,16 @@ html {
     overflow: hidden;
   }
 
+  .project-tile-lg {
+    width: 24rem;
+  }
+
   .project-image {
     width: 24rem;
     object-fit: cover;
     object-position: center;
   }
+
 }
 
 @media only screen and (min-width: 768px) {
@@ -158,8 +163,13 @@ html {
     overflow: hidden;
   }
 
+  .project-tile-lg {
+    width: 28rem;
+    height: 20rem;
+  }
+
   .project-image {
-    width: 25rem;
+    width: 30rem;
     object-fit: cover;
     object-position: center;
   }
