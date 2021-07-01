@@ -1,0 +1,203 @@
+body {
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1280px;
+}
+
+
+
+/*
+ * Custom translucent site header
+ */
+
+.site-header a {
+  color: #efefef;
+  transition: color .15s ease-in-out;
+}
+
+.site-header a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+/*
+ * Navigation Link Animation
+ */
+
+/* Style */
+ul#menu {
+  list-style: none;
+}
+
+ul#menu li {
+  display: inline-block;
+  padding: .3em .5em;
+  position: relative;
+  overflow: hidden;
+}
+
+ul#menu li a {
+  text-decoration: none;
+}
+
+/* Animasi mulai dari lg screen */
+@media only screen and (min-width: 991px) {
+  ul#menu li::before {
+    position: absolute;
+    display: block;
+    content: '';
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 5px;
+    transition: 0.4s;
+    background-color: #fff;
+  }
+
+  ul#menu li.active::before,
+  ul#menu li:hover::before {
+    left: 0%;
+  }
+}
+
+
+/*
+ * Background Parallax
+ */
+
+body,
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+@media only screen and (min-width: 0px) {
+  .parallax {
+    height: 80%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .parallax {
+    /* Full height */
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+.parallax-1 {
+  /* The image used */
+  background-image: url("../img/keyboard10.jpg");
+}
+
+.parallax-2 {
+  /* The image used */
+  background-image: url("../img/keyboard10.jpg");
+}
+
+.parallax-3 {
+  /* The image used */
+  background-image: url("../img/keyboard10.jpg");
+}
+
+.overlay {
+  content: "";
+  background-color: rgba(0, 0, 0, .4);
+
+  height: 100%;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+/*
+ * Image Overlay and animation
+ */
+
+@media only screen and (min-width: 0px) {
+  .project-tile {
+    position: relative;
+    width: 18rem;
+    border-radius: 2rem;
+    border: 3px solid white;
+    overflow: hidden;
+  }
+
+  .project-image {
+    width: 24rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .project-tile {
+    position: relative;
+    width: 22rem;
+    border-radius: 2rem;
+    border: 3px solid white;
+    overflow: hidden;
+  }
+
+  .project-image {
+    width: 25rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.project-desc {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.project-desc:hover {
+  opacity: 0.7;
+}
+
+
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal>* {
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .flex-md-equal>* {
+    flex: 1;
+  }
+}
