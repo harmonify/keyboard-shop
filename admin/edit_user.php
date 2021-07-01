@@ -21,7 +21,7 @@ require "../helpers/functions.php";
 $id = $_GET['id'];
 
 //query data user yang bersangkutan
-$user = query("SELECT * FROM tb_users WHERE id='$id'")[0];
+$row = query("SELECT * FROM tb_users WHERE id='$id'")[0];
 
 //apabila user telah selesai mengubah data di form
 if(isset($_POST["submit"])) {
@@ -52,67 +52,247 @@ if(isset($_POST["submit"])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-  <title>Edit Data User</title>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../pages/style.css">
+
+  <title>Edit User Profile</title>
 </head>
 
-<body class="bg-dark">
-  <div class="container">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="modalEditLabel">Edit Data User</h4>
-          <a href="index.php" class="btn-close"></a>
+<style>
+  body {
+    background-image: url("../img/keyboard3.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    scroll-behavior: smooth;
+  }
+
+</style>
+
+<body class="min-vh-100">
+
+  <!-- Header -->
+  <header class="site-header sticky-top px-5" style="background-color: #16161d;">
+    <div class="navbar navbar-expand-lg p-1">
+      <div class="container d-flex flex-column flex-md-row">
+        <div class="row w-100">
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-keyboard-fill text-white fs-1 align-center"></i>
+          </button>
+
+          <a href="index.php" class="navbar-brand d-none d-lg-inline-block col-2">
+            <i class="bi bi-keyboard-fill fs-1 d-inline-block"></i>
+            <span class="d-inline-block fs-4 p-0 ps-2 position-relative"
+              style="top: -4px;  font-family: 'Yellowtail', cursive;">Harmonikeys</span>
+          </a>
+
+          <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
+            <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
+              <li class="nav-item me-lg-4">
+                <a class="nav-link fs-5" aria-current="page" href="index.php#home">Home</a>
+              </li>
+              <li class="nav-item me-lg-4">
+                <a class="nav-link fs-5" href="index.php#features">Features</a>
+              </li>
+              <li class="nav-item me-lg-4">
+                <a class="nav-link fs-5" href="index.php#getstarted">Get Started</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-5" href="index.php#gallery">Gallery</a>
+              </li>
+              <div>
+                <hr class="dropdown-divider text-white">
+              </div>
+              <!-- List item yg tampil saat layar kecil -->
+              <?php if( !(isset($_SESSION["login"])) ) : ?>
+              <li class="d-block d-lg-none nav-item me-5">
+                <a href="login.php" class="nav-link fs-5 text-decoration-none">Login</a>
+              </li>
+              <?php else : ?>
+              <li class="d-block d-lg-none nav-item dropdown me-5">
+                <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown1" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="../img/<?= $row['userimg'] ?>" class="rounded-pill" width="30" height="30"
+                    alt="User Profile Image">
+                  <span><?= $row['username'] ?></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                  <li class="d-block"><a href="profile.php" class="dropdown-item text-reset">Your Profile</a></li>
+                  <li class="d-block"><a href="edit_profile.php" class="dropdown-item text-reset">Edit Profile</a></li>
+                  <?php if (isset($_SESSION["administrator"])) : ?>
+                  <li class="d-block"><a href="../admin/index.php" class="dropdown-item text-reset">Go to Dashboard</a>
+                  </li>
+                  <?php endif; ?>
+                  <li class="d-block">
+                    <div class="dropdown-divider"></div>
+                  </li>
+                  <li class="d-block"><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+                </ul>
+              </li>
+              <?php endif; ?>
+              <!-- /List item yg tampil saat layar kecil -->
+            </ul>
+          </nav>
+
+          <!-- List item yg tampil saat layar besar -->
+          <div class="dropdown d-none d-lg-inline-block col-2 mt-3 p-1">
+            <?php if( !(isset($_SESSION["login"])) ) : ?>
+            <div class="nav-item">
+              <a href="login.php" class="text-decoration-none fs-5">Login</a>
+            </div>
+
+            <?php else : ?>
+            <div class="d-none d-lg-block nav-item dropdown">
+              <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown2" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <img src="../img/<?= $row['userimg'] ?>" class="rounded-pill" width="30" height="30"
+                  alt="User Profile Image">
+                <span><?= $row['username'] ?></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdown2">
+                <li><a href="profile.php" class="dropdown-item text-reset mb-2">Your Profile</a></li>
+                <li><a href="edit_profile.php" class="dropdown-item text-reset mb-2">Edit Profile</a></li>
+                <?php if (isset($_SESSION["administrator"])) : ?>
+                <li><a href="../admin/index.php" class="dropdown-item text-reset mb-2">Go to Dashboard</a></li>
+                <?php endif; ?>
+                <div class="dropdown-divider"></div>
+                <li><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+              </ul>
+            </div>
+
+            <?php endif; ?>
+          </div>
+          <!-- /List item yg tampil saat layar besar -->
+
         </div>
-        <form action="" method="post" enctype="multipart/form-data">
-          <div class="modal-body">
-            <input type="hidden" name="id" value="<?= $user["id"]; ?>">
-            <input type="hidden" name="userimg_old" value="<?= $user["userimg"]; ?>">
-            <input type="hidden" name="userpass_old" value="<?= $user["userpass"]; ?>">
-            <div class="mb-3">
-              <label for="formName" class="form-label">Username</label>
-              <input type="text" class="form-control" id="formName" name="username" placeholder="Example"
-                value="<?= $user["username"]; ?>" required>
-            </div>
-            <div class="mb-3">
-              <label for="formPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="formPassword" name="userpass" placeholder="••••••••">
-            </div>
-            <div class="mb-4">
-              <label for="formPassword" class="form-label">Confirm Password</label>
-              <input type="password" class="form-control" id="formPassword" name="userpass_confirm"
-                placeholder="••••••••">
-            </div>
-            <div class="mb-3">
-              <label for="formFile" class="form-label">Profile Picture</label>
-              <input class="form-control" type="file" id="formFile" name="userimg">
-            </div>
-            <div class="mb-3">
-              <label for="userrole" class="form-label">Role User</label>
-              <select class="form-select" name="userrole" id="userrole">
-                <?php $select1 = ""; $select2 = "";
-                if ($user["userrole"] === "user") {
-                  $select1 = "selected";
-                }
-                else $select2 = "selected";
-                ?>
-                <option value="user" <?= $select1 ?>>User</option>
-                <option value="administrator" <?= $select2 ?>>Administrator</option>
-              </select>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <a href="index.php" class="btn btn-default">Batal</a>
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
+        <!-- /.row -->
+
       </div>
-      <!-- /.modal-content -->
+      <!-- /.container -->
+
     </div>
-    <!-- /.modal-dialog -->
+    <!-- /.navbar -->
+
+  </header>
+  <!-- /Header -->
+
+  <!-- Main -->
+  <main class="min-vh-100 container d-flex flex-column justify-content-center align-items-center my-5">
+    <div class="row w-75 d-flex flex-column align-items-center text-center shadow-lg bg-light py-5 px-5 m-5"
+      style="border-radius: 2rem;">
+
+      <div class="mt-4 mb-5">
+        <h1 class="display-2">Edit User Profile</h1>
+      </div>
+
+      <div class="mb-5">
+        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="width: 15rem; height: 15rem;">
+      </div>
+
+      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
+        <div class="mb-3">
+          <label for="formName" class="form-label">Username</label>
+          <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example" value="<?= $row["username"] ?>"
+            required>
+        </div>
+        <div class="mb-3">
+          <label for="formPassword" class="form-label">Password</label>
+          <input type="password" class="form-control form-control-lg" id="formPassword" name="userpass"
+            placeholder="••••••••">
+        </div>
+        <div class="mb-3">
+          <label for="formPassword2" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control form-control-lg" id="formPassword2" name="userpass_confirm"
+            placeholder="••••••••">
+        </div>
+
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Profile Picture</label>
+          <input class="form-control form-control-lg" type="file" id="formFile" name="userimg">
+        </div>
+
+        <div class="mb-5">
+          <?php $check1 = ""; $check2 = "";
+          if($row["userrole"] === "user") {
+            $check1 = "selected";
+          } else $check2 = "selected";
+          ?>
+          <label for="userrole">Role User</label>
+          <select class="form-select form-select-lg" name="userrole" id="userrole">
+            <option value="user" <?= $check1 ?>>User</option>
+            <option value="administrator" <?= $check2 ?>>Administrator</option>
+          </select>
+        </div>
+
+        <div class="mt-5 mb-4">
+          <a href="index.php" class="btn btn-lg btn-default">Batal</a>
+          <button type="submit" name="submit" class="btn btn-lg btn-primary">Submit</button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+  <!-- /Main -->
+
+
+  <!-- Footer -->
+  <footer class="container-fluid py-5 text-white position-relative bottom-0 fixed-bottom"
+    style="background-color: #16161d;">
+    <div class="row">
+      <div class="col-12 col-md text-center">
+        <i class="bi bi-keyboard-fill fs-3"></i>
+        <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Features</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Cool stuff</a></li>
+          <li><a class="link-secondary" href="#">Random feature</a></li>
+          <li><a class="link-secondary" href="#">Team feature</a></li>
+          <li><a class="link-secondary" href="#">Stuff for developers</a></li>
+          <li><a class="link-secondary" href="#">Another one</a></li>
+          <li><a class="link-secondary" href="#">Last time</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Resource name</a></li>
+          <li><a class="link-secondary" href="#">Resource</a></li>
+          <li><a class="link-secondary" href="#">Another resource</a></li>
+          <li><a class="link-secondary" href="#">Final resource</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>Resources</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Business</a></li>
+          <li><a class="link-secondary" href="#">Education</a></li>
+          <li><a class="link-secondary" href="#">Government</a></li>
+          <li><a class="link-secondary" href="#">Gaming</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md">
+        <h5>About</h5>
+        <ul class="list-unstyled text-small">
+          <li><a class="link-secondary" href="#">Team</a></li>
+          <li><a class="link-secondary" href="#">Locations</a></li>
+          <li><a class="link-secondary" href="#">Privacy</a></li>
+          <li><a class="link-secondary" href="#">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <!-- /Footer -->
 
 
 
-  </div>
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">

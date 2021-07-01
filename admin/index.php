@@ -44,10 +44,23 @@ $users = query("SELECT * FROM tb_users");
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
   <!-- Custom CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../pages/style.css">
 
-  <title>Administrator</title>
+  <title>Dashboard</title>
 </head>
+
+<style>
+  body {
+    background-image: url("../img/keyboard3.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    scroll-behavior: smooth;
+  }
+
+</style>
 
 <body>
   <!-- Header -->
@@ -98,8 +111,10 @@ $users = query("SELECT * FROM tb_users");
                   <span><?= $row['username'] ?></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                  <li class="d-block"><a href="../pages/profile.php" class="dropdown-item text-reset">Your Profile</a></li>
-                  <li class="d-block"><a href="../pages/edit_profile.php" class="dropdown-item text-reset">Edit Profile</a></li>
+                  <li class="d-block"><a href="../pages/profile.php" class="dropdown-item text-reset">Your Profile</a>
+                  </li>
+                  <li class="d-block"><a href="../pages/edit_profile.php" class="dropdown-item text-reset">Edit
+                      Profile</a></li>
                   <?php if (isset($_SESSION["administrator"])) : ?>
                   <li class="d-block"><a href="../pages/index.php" class="dropdown-item text-reset">Go to Main Page</a>
                   </li>
@@ -170,7 +185,7 @@ $users = query("SELECT * FROM tb_users");
         <input class="form-control" type="text" placeholder="Search" aria-label="Search">
       </form>
     </div>
-    <div class="row w-75">
+    <div class="row w-75 bg-light rounded-3 shadow-lg">
       <table class="table table-striped border-bottom shadow">
         <thead>
           <th scope="col">#</th>
