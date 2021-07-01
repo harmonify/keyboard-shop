@@ -6,18 +6,29 @@ Seorang user dapat memiliki 1 diantara 2 role yang berbeda:
 Untuk mengakses akun admin, gunakan username dan password berikut.
   username: admin
   password: admin
+
 Seorang admin memiliki fitur:
-1. Login.
-2. Mengubah data user secara manual.
-3. Mengubah role user lain.
-4. Menghapus user.
-5. Logout
++ Login
++ Mengubah data user secara manual
++ Mengubah role user lain
++ Menghapus user
++ Bebas mengakses halaman di folder admin maupun pages
++ Logout
 
 Untuk mengakses akun user biasa, gunakan username dan password berikut.
   username: wendy
   password: wendy
+
 Seorang user biasa memiliki fitur:
-1. Registrasi.
-2. Login.
-3. Mengubah profile.
-4. Logout.
++ Registrasi
++ Login
++ Melihat profile sendiri
++ Mengubah profile sendiri
++ Logout
+
+Seorang user tidak bisa :
+- Mengakses folder admin
+- Melihat profile user lain
+- Mengubah profile user lain
+- Mengubah role user lain
+- Menghapus user lain
