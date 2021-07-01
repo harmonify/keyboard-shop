@@ -1,14 +1,14 @@
 <?php
 /* Connect ke database */
 $conn = new mysqli("localhost", "root", "", "db_finalproject");
-if($conn->connect_error){
+if($conn->connect_error) {
   trigger_error('Koneksi ke database gagal: ' .$conn->connect_error, E_USER_ERROR);
 }
 
 
 
 /* Fungsi Untuk Mempersiapkan Hasil Query */
-function query($query){
+function query($query) {
   global $conn;
 
   //query data yang diperlukan
@@ -27,7 +27,7 @@ function query($query){
 
 
 /* Fungsi Untuk Menambah User */
-function addUser($data){
+function addUser($data) {
   global $conn;
   //tangkap data
   $username = strtolower(htmlspecialchars($data["username"]));
@@ -65,7 +65,7 @@ function addUser($data){
 
 
 /* Fungsi Untuk Mengupload Gambar */
-function upload(){
+function upload() {
   //tangkap file data
   $userimg_name = htmlspecialchars($_FILES["userimg"]["name"]);
   $userimg_tmp = htmlspecialchars($_FILES["userimg"]["tmp_name"]);
@@ -99,7 +99,7 @@ function delUser($id) {
 
 
 /* Fungsi Untuk Mengubah Data User */
-function editUser($data){
+function editUser($data) {
   global $conn;
 
   //tangkap data
@@ -167,7 +167,7 @@ function editUser($data){
 
 
 /* Fungsi Registrasi */
-function registerUser($data){
+function registerUser($data) {
   global $conn;
   //tangkap data
   $username = strtolower(htmlspecialchars($data["username"]));
@@ -211,6 +211,45 @@ function registerUser($data){
   //mengembalikan status query
   return mysqli_affected_rows($conn);
 }
+
+
+
+/* Fungsi Menambah Role Baru */
+function addRole($data) {
+  global $conn;
+
+  $rolename = strtolower(htmlspecialchars($data["rolename"]));
+  $roleby = $data["roleby"];
+
+  //apabila role sudah ada, hentikan
+  $result = $conn->query("SELECT * FROM tb_roles where rolename = '$rolename'");
+  if (mysqli_fetch_row($result) > 0) {
+    echo "<script>alert('Role sudah ada!')</script>";
+    return false;
+  }
+
+  //tambahkan role baru
+  $query = "INSERT INTO tb_roles VALUES ('', '$rolename', '$roleby')";
+  $conn -> query($query);
+
+  return mysqli_affected_rows($conn);
+}
+
+
+
+/* Fungsi Menghapus Role */
+function delRole($data) {
+	global $conn;
+
+  $rolename = $data["rolename"];
+
+  //hapus role
+	$conn->query("DELETE FROM tb_roles WHERE rolename='$rolename'");
+
+  //mengembalikan status query
+	return mysqli_affected_rows($conn);
+}
+
 
 
 ?>

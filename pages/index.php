@@ -9,29 +9,6 @@ if (isset($_SESSION["username"])) {
   $row = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
 }
 
-//apabila user registrasi di halaman ini
-if(isset($_POST["submit"])) {
-  //jika user sudah login
-  if (isset($_SESSION["login"])) {
-    echo '<script>
-            alert("Anda Harus Logout Terlebih Dahulu!");
-            document.location.href = "index.php";
-          </script>';
-  }
-  //jalankan fungsi register dan redirect ke profile.php apabila berhasil
-  if (registerUser($_POST) > 0){
-    echo '<script>
-            alert("Anda Berhasil Registrasi");
-            document.location.href = "profile.php";
-          </script>';
-  } else {
-    echo '<script>
-            alert("Anda Gagal Registrasi");
-            document.location.href = "index.php";
-          </script>';
-  }
-};
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -76,18 +53,30 @@ if(isset($_POST["submit"])) {
           </a>
 
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
-            <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
+            <ul class="navbar-nav mb-2 mb-sm-0 text-center" id="menu">
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="#home">Home</a>
+                <a class="nav-link fs-5" aria-current="page" href="#home">
+                  <i class="bi bi-house-door-fill"></i>
+                  <span>Home</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="#features">Features</a>
+                <a class="nav-link fs-5" href="#features">
+                  <i class="bi bi-stars"></i>
+                  <span>Features</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="#getstarted">Get Started</a>
+                <a class="nav-link fs-5" href="#getstarted">
+                  <i class="bi bi-tag-fill"></i>
+                  <span>Get Started</span>
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-5" href="#gallery">Gallery</a>
+                <a class="nav-link fs-5" href="#gallery">
+                  <i class="bi bi-images"></i>
+                  <span>Gallery</span>
+                </a>
               </li>
               <div>
                 <hr class="dropdown-divider text-white">
@@ -263,26 +252,19 @@ if(isset($_POST["submit"])) {
         </div>
       </div>
 
-      <!-- Form -->
-      <div class="col-12 col-md-5 py-5 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
+      <div
+        class="col-12 col-md-5 py-5 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
 
-        <div class="mb-3">
+        <div class="mb-4">
           <p class="lead display-5 text-white">Get Started!</p>
         </div>
-
-        <form action="#" method="post" class="w-100 pe-lg-4">
-          <div class="form-floating mb-4">
-            <input type="text" class="form-control form-control-lg" id="floatingInput" name="username"
-              placeholder="Username" required>
-            <label for="floatingInput" class="text-muted">Username</label>
-          </div>
-          <div class="form-floating mb-4">
-            <input type="password" class="form-control form-control-lg" id="floatingPassword" name="userpass"
-              placeholder="Password" required>
-            <label for="floatingPassword" class="text-muted">Password</label>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg w-100" name="submit">Register</button>
-        </form>
+        <div class="mb-4">
+          <p class="lead fs-5 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore harum quod
+            non? Corrupti soluta placeat quo impedit ipsum quae nam aperiam culpa, maiores facere laudantium!</p>
+        </div>
+        <a href="register.php" class="btn btn-primary btn-lg w-100 form-animate">
+          Register
+        </a>
       </div>
 
     </div>

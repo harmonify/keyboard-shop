@@ -107,6 +107,9 @@ if (isset($_POST["submit"])) {
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+
   <title>Login</title>
 </head>
 
@@ -114,7 +117,7 @@ if (isset($_POST["submit"])) {
   <main class="form-login">
     <form action="" method="post">
       <i class="bi bi-keyboard-fill mb-3" style="font-size: 60px;"></i>
-      <h1 class="h3 mb-4 fw-normal">Please log in</h1>
+      <h1 class="h3 mb-4 fw-normal" style="font-family: 'Yellowtail','cursive';">Harmonikeys</h1>
 
       <div class="form-floating">
         <input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username" required>
@@ -129,9 +132,13 @@ if (isset($_POST["submit"])) {
         <input class="form-check-input" type="checkbox" id="rememberMe">
         <label class="form-check-label" for="rememberMe">Remember me</label>
       </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Login</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+      <button class="w-100 btn btn-lg btn-primary bg-gradient" type="submit" name="submit">Login</button>
     </form>
+    <hr class="dropdown-divider my-4">
+    <div>
+      <a href="register.php" class="w-100 btn btn-lg mb-4 btn-success">Create New Account</a>
+    </div>
+    <p class="mt-4 mb-3 text-muted">&copy; 2021</p>
   </main>
 </body>
 

@@ -17,29 +17,49 @@ if (!isset($_SESSION['administrator'])) {
 
 require "../helpers/functions.php";
 
-//ambil data di url
-$id = $_GET['id'];
+//query data admin yang sedang online
+if (isset($_SESSION["username"])) {
+  $ses_username = $_SESSION["username"];
+  $row = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
+}
 
-//query data user yang bersangkutan
-$row = query("SELECT * FROM tb_users WHERE id='$id'")[0];
+//query data tb_roles
+$roles = query("SELECT * FROM tb_roles");
 
-//apabila user telah selesai mengubah data di form
-if(isset($_POST["submit"])) {
-  //ubah data dan cek apakah data berhasil diganti
-  if(editUser($_POST) > 0) {
+
+//apabila admin mengisi form tambah role
+if(isset($_POST["addrole"])) {
+  //tambah data dan cek apakah data berhasil ditambahkan
+  if (addRole($_POST) > 0) {
     echo '<script>
-            alert("Data User Berhasil Diganti");
+            alert("Role Baru Berhasil Ditambahkan");
             document.location.href = "index.php";
           </script>';
   } else {
     echo '<script>
-            alert("Data User Gagal Diganti");
+            alert("Role Baru Gagal Ditambahkan");
             document.location.href = "index.php";
           </script>';
   }
 }
-?>
 
+//apabila admin mengisi form hapus role
+if(isset($_POST["delrole"])) {
+  //hapus data dan cek apakah data berhasil dihapus
+  if (delRole($_POST) > 0) {
+    echo '<script>
+            alert("Role Berhasil Dihapus");
+            document.location.href = "index.php";
+          </script>';
+  } else {
+    echo '<script>
+            alert("Role Gagal Dihapus");
+            document.location.href = "index.php";
+          </script>';
+  }
+}
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -59,7 +79,7 @@ if(isset($_POST["submit"])) {
   <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../pages/style.css">
 
-  <title>Edit User Profile</title>
+  <title>Manage Roles</title>
 </head>
 
 <style>
@@ -75,7 +95,6 @@ if(isset($_POST["submit"])) {
 </style>
 
 <body class="min-vh-100">
-
   <!-- Header -->
   <header class="site-header sticky-top px-5" style="background-color: #16161d;">
     <div class="navbar navbar-expand-lg p-1">
@@ -96,7 +115,7 @@ if(isset($_POST["submit"])) {
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
             <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="#">
+                <a class="nav-link fs-5" href="index.php">
                   <i class="bi bi-speedometer2"></i>
                   <span>Dashboard</span>
                 </a>
@@ -107,8 +126,8 @@ if(isset($_POST["submit"])) {
                   <span>Add New User</span>
                 </a>
               </li>
-              <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="roles.php">
+              <li class="nav-item me-lg-4 active">
+                <a class="nav-link fs-5" aria-current="page" href="#">
                   <i class="bi bi-gear-fill"></i>
                   <span>Manage Roles</span>
                 </a>
@@ -178,60 +197,61 @@ if(isset($_POST["submit"])) {
   <!-- /Header -->
 
   <!-- Main -->
-  <main class="min-vh-100 container d-flex flex-column justify-content-center align-items-center my-5">
-    <div class="row w-75 d-flex flex-column align-items-center text-center shadow-lg bg-light py-5 px-5 m-5"
-      style="border-radius: 2rem;">
+  <main class="min-vh-100 container d-flex flex-column justify-content-center my-5">
+    <div
+      class="align-self-start row d-flex flex-column align-items-center text-center shadow-lg bg-light py-5 px-5 m-5"
+      style="border-radius: 2rem; width: 60%;">
 
       <div class="mt-4 mb-5">
-        <h1 class="display-2">Edit User Profile</h1>
+        <h1 class="display-2">
+          <i class="bi bi-plus"></i>
+          <span>Add New Role</span>
+        </h1>
       </div>
 
-      <div class="mb-5">
-        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="width: 15rem; height: 15rem;">
-      </div>
-
-      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
+      <form action="" method="post" class="text-start align-self-center w-75 d-flex flex-column">
+        <input type="hidden" name="roleby" value="<?= $row["username"] ?>">
         <div class="mb-3">
-          <label for="formName" class="form-label">Username</label>
-          <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example"
-            value="<?= $row["username"] ?>" required>
-        </div>
-        <div class="mb-3">
-          <label for="formPassword" class="form-label">Password</label>
-          <input type="password" class="form-control form-control-lg" id="formPassword" name="userpass"
-            placeholder="••••••••">
-        </div>
-        <div class="mb-3">
-          <label for="formPassword2" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control form-control-lg" id="formPassword2" name="userpass_confirm"
-            placeholder="••••••••">
-        </div>
-
-        <div class="mb-3">
-          <label for="formFile" class="form-label">Profile Picture</label>
-          <input class="form-control form-control-lg" type="file" id="formFile" name="userimg">
-        </div>
-
-        <div class="mb-5">
-          <label for="userrole">Role User</label>
-          <select class="form-select form-select-lg" name="userrole" id="userrole">
-            <?php foreach($roles as $role) : ?>
-            <?php if(!$row["userrole"] === $role["rolename"]) {
-              $check = "";
-            } else {
-              $check = "selected";
-            }
-            ?>
-            <option value="<?= $role["rolename"] ?>" <?= $check ?>>
-              <?= $role["rolename"] ?>
-            </option>
-            <?php endforeach; ?>
-          </select>
+          <label for="formRole" class="form-label">New Role Name</label>
+          <input type="text" class="form-control form-control-lg" id="formRole" name="rolename" placeholder="example"
+            required>
         </div>
 
         <div class="mt-5 mb-4">
           <a href="index.php" class="btn btn-lg btn-default">Batal</a>
-          <button type="submit" name="submit" class="btn btn-lg btn-primary">Submit</button>
+          <button type="submit" name="addrole" class="btn btn-lg btn-primary"
+            onclick="return confirm('Are you sure you want to add this role?');">Submit</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div
+      class="align-self-end row d-flex flex-column align-items-center text-center shadow-lg bg-light py-5 px-5 m-5"
+      style="border-radius: 2rem; width: 60%;">
+
+      <div class="mt-4 mb-5">
+        <h1 class="display-2">
+          <i class="bi bi-trash"></i>
+          <span>Delete Role</span>
+        </h1>
+      </div>
+
+      <form action="" method="post" class="text-start align-self-center w-75 d-flex flex-column">
+
+        <div class="mb-3">
+          <label for="formRole2" class="form-label">Choose a role</label>
+          <select class="form-select form-select-lg" name="rolename" id="formRole2">
+            <?php foreach($roles as $role) : ?>
+            <option value="<?= $role["rolename"] ?>"><?= $role["rolename"] ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+
+        <div class="mt-5 mb-4 align-self-end">
+          <a href="index.php" class="btn btn-lg btn-default">Batal</a>
+          <button type="submit" name="delrole" class="btn btn-lg btn-danger"
+            onclick="return confirm('Are you sure you want to delete this role?');">Delete</button>
         </div>
 
       </form>

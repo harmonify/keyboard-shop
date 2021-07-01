@@ -55,9 +55,10 @@ if(isset($_POST["submit"])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
   <!-- Custom CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../pages/style.css">
 
-  <title>Add New User</title>
+  <title>Add User</title>
 </head>
 
 <style>
@@ -84,7 +85,7 @@ if(isset($_POST["submit"])) {
             <i class="bi bi-keyboard-fill text-white fs-1 align-center"></i>
           </button>
 
-          <a href="index.php" class="navbar-brand d-none d-lg-inline-block col-2">
+          <a href="" class="navbar-brand d-none d-lg-inline-block col-2">
             <i class="bi bi-keyboard-fill fs-1 d-inline-block"></i>
             <span class="d-inline-block fs-4 p-0 ps-2 position-relative"
               style="top: -4px;  font-family: 'Yellowtail', cursive;">Harmonikeys</span>
@@ -93,26 +94,27 @@ if(isset($_POST["submit"])) {
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
             <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="index.php#home">Home</a>
+                <a class="nav-link fs-5" href="index.php">
+                  <i class="bi bi-speedometer2"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li class="nav-item me-lg-4 active">
+                <a class="nav-link fs-5" aria-current="page" href="#">
+                  <i class="bi bi-plus"></i>
+                  <span>Add New User</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="index.php#features">Features</a>
-              </li>
-              <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="index.php#getstarted">Get Started</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-5" href="index.php#gallery">Gallery</a>
+                <a class="nav-link fs-5" href="roles.php">
+                  <i class="bi bi-gear-fill"></i>
+                  <span>Manage Roles</span>
+                </a>
               </li>
               <div>
                 <hr class="dropdown-divider text-white">
               </div>
               <!-- List item yg tampil saat layar kecil -->
-              <?php if( !(isset($_SESSION["login"])) ) : ?>
-              <li class="d-block d-lg-none nav-item me-5">
-                <a href="login.php" class="nav-link fs-5 text-decoration-none">Login</a>
-              </li>
-              <?php else : ?>
               <li class="d-block d-lg-none nav-item dropdown me-5">
                 <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown1" data-bs-toggle="dropdown"
                   aria-expanded="false">
@@ -121,31 +123,26 @@ if(isset($_POST["submit"])) {
                   <span><?= $row['username'] ?></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
-                  <li class="d-block"><a href="profile.php" class="dropdown-item text-reset">Your Profile</a></li>
-                  <li class="d-block"><a href="edit_profile.php" class="dropdown-item text-reset">Edit Profile</a></li>
+                  <li class="d-block"><a href="../pages/profile.php" class="dropdown-item text-reset">Your Profile</a>
+                  </li>
+                  <li class="d-block"><a href="../pages/edit_profile.php" class="dropdown-item text-reset">Edit
+                      Profile</a></li>
                   <?php if (isset($_SESSION["administrator"])) : ?>
-                  <li class="d-block"><a href="../admin/index.php" class="dropdown-item text-reset">Go to Dashboard</a>
+                  <li class="d-block"><a href="../pages/index.php" class="dropdown-item text-reset">Go to Main Page</a>
                   </li>
                   <?php endif; ?>
                   <li class="d-block">
                     <div class="dropdown-divider"></div>
                   </li>
-                  <li class="d-block"><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+                  <li class="d-block"><a href="../pages/logout.php" class="dropdown-item text-reset">Logout</a></li>
                 </ul>
               </li>
-              <?php endif; ?>
               <!-- /List item yg tampil saat layar kecil -->
             </ul>
           </nav>
 
           <!-- List item yg tampil saat layar besar -->
           <div class="dropdown d-none d-lg-inline-block col-2 mt-3 p-1">
-            <?php if( !(isset($_SESSION["login"])) ) : ?>
-            <div class="nav-item">
-              <a href="login.php" class="text-decoration-none fs-5">Login</a>
-            </div>
-
-            <?php else : ?>
             <div class="d-none d-lg-block nav-item dropdown">
               <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown2" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -154,17 +151,15 @@ if(isset($_POST["submit"])) {
                 <span><?= $row['username'] ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdown2">
-                <li><a href="profile.php" class="dropdown-item text-reset mb-2">Your Profile</a></li>
-                <li><a href="edit_profile.php" class="dropdown-item text-reset mb-2">Edit Profile</a></li>
+                <li><a href="../pages/profile.php" class="dropdown-item text-reset mb-2">Your Profile</a></li>
+                <li><a href="../pages/edit_profile.php" class="dropdown-item text-reset mb-2">Edit Profile</a></li>
                 <?php if (isset($_SESSION["administrator"])) : ?>
-                <li><a href="../admin/index.php" class="dropdown-item text-reset mb-2">Go to Dashboard</a></li>
+                <li><a href="../pages/index.php" class="dropdown-item text-reset mb-2">Go to Main Page</a></li>
                 <?php endif; ?>
                 <div class="dropdown-divider"></div>
-                <li><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+                <li><a href="../pages/logout.php" class="dropdown-item text-reset">Logout</a></li>
               </ul>
             </div>
-
-            <?php endif; ?>
           </div>
           <!-- /List item yg tampil saat layar besar -->
 
@@ -196,16 +191,18 @@ if(isset($_POST["submit"])) {
       <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
         <div class="mb-3">
           <label for="formName" class="form-label">Username</label>
-          <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example" required>
+          <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example"
+            required>
         </div>
         <div class="mb-3">
           <label for="formPassword" class="form-label">Password</label>
-          <input type="password" class="form-control form-control-lg" id="formPassword" name="userpass" placeholder="••••••••" required>
+          <input type="password" class="form-control form-control-lg" id="formPassword" name="userpass"
+            placeholder="••••••••" required>
         </div>
         <div class="mb-3">
           <label for="formPassword2" class="form-label">Confirm Password</label>
-          <input type="password" class="form-control form-control-lg" id="formPassword2" name="userpass_confirm" placeholder="••••••••"
-            required>
+          <input type="password" class="form-control form-control-lg" id="formPassword2" name="userpass_confirm"
+            placeholder="••••••••" required>
         </div>
 
         <div class="mb-3">

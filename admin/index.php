@@ -82,27 +82,28 @@ $users = query("SELECT * FROM tb_users");
 
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
             <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
-              <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="#home">Home</a>
+              <li class="nav-item me-lg-4 active">
+                <a class="nav-link fs-5" aria-current="page" href="#">
+                  <i class="bi bi-speedometer2"></i>
+                  <span>Dashboard</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="#features">Features</a>
+                <a class="nav-link fs-5" href="add_user.php">
+                  <i class="bi bi-plus"></i>
+                  <span>Add New User</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="#getstarted">Get Started</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link fs-5" href="#gallery">Gallery</a>
+                <a class="nav-link fs-5" href="roles.php">
+                  <i class="bi bi-gear-fill"></i>
+                  <span>Manage Roles</span>
+                </a>
               </li>
               <div>
                 <hr class="dropdown-divider text-white">
               </div>
               <!-- List item yg tampil saat layar kecil -->
-              <?php if( !(isset($_SESSION["login"])) ) : ?>
-              <li class="d-block d-lg-none nav-item me-5">
-                <a href="login.php" class="nav-link fs-5 text-decoration-none">Login</a>
-              </li>
-              <?php else : ?>
               <li class="d-block d-lg-none nav-item dropdown me-5">
                 <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown1" data-bs-toggle="dropdown"
                   aria-expanded="false">
@@ -122,22 +123,15 @@ $users = query("SELECT * FROM tb_users");
                   <li class="d-block">
                     <div class="dropdown-divider"></div>
                   </li>
-                  <li class="d-block"><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+                  <li class="d-block"><a href="../pages/logout.php" class="dropdown-item text-reset">Logout</a></li>
                 </ul>
               </li>
-              <?php endif; ?>
               <!-- /List item yg tampil saat layar kecil -->
             </ul>
           </nav>
 
           <!-- List item yg tampil saat layar besar -->
           <div class="dropdown d-none d-lg-inline-block col-2 mt-3 p-1">
-            <?php if( !(isset($_SESSION["login"])) ) : ?>
-            <div class="nav-item">
-              <a href="login.php" class="text-decoration-none fs-5">Login</a>
-            </div>
-
-            <?php else : ?>
             <div class="d-none d-lg-block nav-item dropdown">
               <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown2" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -152,11 +146,9 @@ $users = query("SELECT * FROM tb_users");
                 <li><a href="../pages/index.php" class="dropdown-item text-reset mb-2">Go to Main Page</a></li>
                 <?php endif; ?>
                 <div class="dropdown-divider"></div>
-                <li><a href="logout.php" class="dropdown-item text-reset">Logout</a></li>
+                <li><a href="../pages/logout.php" class="dropdown-item text-reset">Logout</a></li>
               </ul>
             </div>
-
-            <?php endif; ?>
           </div>
           <!-- /List item yg tampil saat layar besar -->
 
@@ -201,7 +193,7 @@ $users = query("SELECT * FROM tb_users");
           <tr>
             <th scope="row"><?= $i ?></th>
             <td><?= $row["username"] ?></td>
-            <td><?= substr(($row["userpass"]), 0, 10)."...." ?></td>
+            <td>••••••••</td>
             <td><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
                 height="50" alt="User image"></td>
             <td><?= $row["userrole"] ?></td>
@@ -223,6 +215,7 @@ $users = query("SELECT * FROM tb_users");
       </table>
     </div>
   </div>
+  <!-- /Tabel Data User -->
 
   <!-- Footer -->
   <footer class="container-fluid py-5 text-white position-relative bottom-0 fixed-bottom"

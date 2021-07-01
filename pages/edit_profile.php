@@ -3,6 +3,14 @@ session_start();
 
 require "../helpers/functions.php";
 
+//cek sesi
+if (!isset($_SESSION['login'])) {
+  echo "<script>
+          alert('Login dulu...');
+          document.location.href = '../pages/login.php';
+        </script>";
+}
+
 //query data user yang sedang online
 if (isset($_SESSION["username"])) {
   $ses_username = $_SESSION["username"];
@@ -79,18 +87,30 @@ if(isset($_POST["submit"])) {
           </a>
 
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
-            <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
+            <ul class="navbar-nav mb-2 mb-sm-0 text-center" id="menu">
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="index.php#home">Home</a>
+                <a class="nav-link fs-5" aria-current="page" href="index.php#home">
+                  <i class="bi bi-house-door-fill"></i>
+                  <span>Home</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="index.php#features">Features</a>
+                <a class="nav-link fs-5" href="index.php#features">
+                  <i class="bi bi-stars"></i>
+                  <span>Features</span>
+                </a>
               </li>
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" href="index.php#getstarted">Get Started</a>
+                <a class="nav-link fs-5" href="index.php#getstarted">
+                  <i class="bi bi-tag-fill"></i>
+                  <span>Get Started</span>
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-5" href="index.php#gallery">Gallery</a>
+                <a class="nav-link fs-5" href="index.php#gallery">
+                  <i class="bi bi-images"></i>
+                  <span>Gallery</span>
+                </a>
               </li>
               <div>
                 <hr class="dropdown-divider text-white">

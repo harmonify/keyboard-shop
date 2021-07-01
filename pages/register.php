@@ -1,6 +1,14 @@
 <?php
 require "../helpers/functions.php";
 
+//cek sesi dan cek role user
+if (isset($_SESSION['login'])) {
+  echo "<script>
+          alert('Logout dulu...');
+          document.location.href = 'index.php';
+        </script>";
+}
+
 //apabila user telah mengisi form register
 if(isset($_POST["submit"])) {
   if (registerUser($_POST) > 0){
@@ -37,7 +45,7 @@ if(isset($_POST["submit"])) {
 
 <style>
   body {
-    background-image: url("../img/keyboard9.jpg");
+    background-image: url("../img/keyboard3.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -48,7 +56,8 @@ if(isset($_POST["submit"])) {
 
 <body>
   <div
-    class="container d-flex flex-column justify-content-center align-items-center border shadow bg-light w-50 py-5 px-3 my-3" style="border-radius: 2rem;">
+    class="container d-flex flex-column justify-content-center align-items-center border shadow bg-light w-50 py-5 px-3 my-3"
+    style="border-radius: 2rem;">
     <div class="row mb-4">
       <h1 class="fs-2">Halaman Registrasi</h1>
     </div>
