@@ -215,8 +215,9 @@ if(isset($_POST["submit"])) {
         <div class="mb-5">
           <label for="userrole">Role User</label>
           <select class="form-select form-select-lg" name="userrole" id="userrole">
-            <?php foreach($roles as $role) : ?>
-            <?php if(!$row["userrole"] === $role["rolename"]) {
+            <?php $roles = query("SELECT * FROM tb_roles");
+            foreach($roles as $role) : ?>
+            <?php if(!($row["userrole"] === $role["rolename"])) {
               $check = "";
             } else {
               $check = "selected";
