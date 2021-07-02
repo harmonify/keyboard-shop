@@ -3,33 +3,37 @@ Seorang pengguna aplikasi ini dapat diassign satu role dari role yang berbeda-be
 1. user (default).
 2. administrator.
 
+
+Berikut merupakan fitur-fitur umum yang tersedia di aplikasi ini.
+1. Registrasi.
+2. Login.
+3. Melihat profile sendiri.
+4. Mengubah profile sendiri.
+5. Logout.
+Adapun fitur-fitur khusus yang hanya diberikan kepada pengguna dengan role administrator.
+
+
 Untuk mengakses akun admin, gunakan username dan password berikut.
   username: admin
   password: admin
 
-Seorang admin memiliki fitur:
-+ Login
+Seorang admin memiliki fitur khusus:
 + Mengubah data user secara manual
 + Mengubah role user lain
 + Menghapus user
 + Menambah role baru
 + Menghapus role yang telah dibuat
 + Bebas mengakses halaman di folder admin maupun pages
-+ Logout
+
 
 Untuk mengakses akun user biasa, gunakan username dan password berikut.
   username: wendy
   password: wendy
 
-Seorang user biasa memiliki fitur:
-+ Registrasi
-+ Login
-+ Melihat profile sendiri
-+ Mengubah profile sendiri
-+ Logout
+Seorang user biasa memiliki semua fitur umum aplikasi ini.
 
 Seorang user tidak bisa :
-- Mengakses folder admin
+- Mengakses semua halaman di folder admin
 - Melihat profile user lain
 - Mengubah profile user lain
 - Mengubah role user lain
