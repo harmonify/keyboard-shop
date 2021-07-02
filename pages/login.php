@@ -30,6 +30,7 @@ if (isset($_POST["submit"])) {
       //set session login
       $_SESSION["username"] = $username;
       $_SESSION["login"] = true;
+      
       if($row["userrole"] === "administrator") {
         //set session untuk admin
         $_SESSION["administrator"] = true;
@@ -128,10 +129,7 @@ if (isset($_POST["submit"])) {
           required>
         <label for="floatingPassword" class="text-muted">Password</label>
       </div>
-      <div class="form-check form-switch mb-3 text-start">
-        <input class="form-check-input" type="checkbox" id="rememberMe">
-        <label class="form-check-label" for="rememberMe">Remember me</label>
-      </div>
+
       <button class="w-100 btn btn-lg btn-primary bg-gradient" type="submit" name="submit">Login</button>
     </form>
     <hr class="dropdown-divider my-4">

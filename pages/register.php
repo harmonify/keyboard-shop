@@ -1,13 +1,11 @@
 <?php
-require "../helpers/functions.php";
+//cek status login user
+require_once "../helpers/check.php";
 
-//cek sesi dan cek role user
-if (isset($_SESSION['login'])) {
-  echo "<script>
-          alert('Logout dulu...');
-          document.location.href = 'index.php';
-        </script>";
-}
+//redirect apabila sudah login
+isLoggedIn("index.php");
+
+require "../helpers/functions.php";
 
 //apabila user telah mengisi form register
 if(isset($_POST["submit"])) {
@@ -25,8 +23,6 @@ if(isset($_POST["submit"])) {
 };
 
 ?>
-
-
 
 <!doctype html>
 <html lang="en">

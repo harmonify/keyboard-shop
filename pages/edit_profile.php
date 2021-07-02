@@ -1,15 +1,10 @@
 <?php
-session_start();
+//cek sesi dan cek role user
+require_once "../helpers/check.php";
+
+isNotLoggedIn("login.php");
 
 require "../helpers/functions.php";
-
-//cek sesi
-if (!isset($_SESSION['login'])) {
-  echo "<script>
-          alert('Login dulu...');
-          document.location.href = '../pages/login.php';
-        </script>";
-}
 
 //query data user yang sedang online
 if (isset($_SESSION["username"])) {

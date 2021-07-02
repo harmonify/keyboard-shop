@@ -1,19 +1,9 @@
 <?php
-session_start();
-
 //cek sesi dan cek role user
-if (!isset($_SESSION['login'])) {
-  echo "<script>
-          alert('Login dulu...');
-          document.location.href = '../pages/login.php';
-        </script>";
-}
-if (!isset($_SESSION['administrator'])) {
-  echo "<script>
-          alert('Anda tidak memiliki izin');
-          document.location.href = '../pages/index.php';
-        </script>";
-}
+require_once "../helpers/check.php";
+
+isNotLoggedIn("../pages/login.php");
+isNotAdministrator("../pages/login.php");
 
 require "../helpers/functions.php";
 
