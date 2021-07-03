@@ -7,9 +7,9 @@ isNotLoggedIn("login.php");
 require "../helpers/functions.php";
 
 //query data user yang sedang online
-if (isset($_SESSION["username"])) {
-  $ses_username = $_SESSION["username"];
-  $ses_data = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
+if (isset($_SESSION["id"])) {
+  $ses_id = $_SESSION["id"];
+  $ses_data = query("SELECT * FROM tb_users WHERE id = '$ses_id'")[0];
 }
 
 ?>

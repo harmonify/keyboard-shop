@@ -22,15 +22,13 @@ if (isset($_POST["submit"])) {
   //cek username
   $result = $conn->query("SELECT * FROM tb_users WHERE username='$username'");
   if (mysqli_num_rows($result) === 1) {
-
     //cek password
     $row = mysqli_fetch_assoc($result);
-
     if(password_verify($userpass, $row["userpass"])) {
       //set session login
-      $_SESSION["username"] = $username;
+      $_SESSION["id"] = $row["id"];
       $_SESSION["login"] = true;
-      
+
       if($row["userrole"] === "administrator") {
         //set session untuk admin
         $_SESSION["administrator"] = true;
@@ -42,12 +40,12 @@ if (isset($_POST["submit"])) {
         exit;
       }
     }
-  }
-  else {
-    echo '<script>
-            alert("Username atau Password anda salah");
-            document.location.href="login.php";
-          </script>';
+    else {
+      echo '<script>
+              alert("Username atau Password anda salah");
+              document.location.href="login.php";
+            </script>';
+    }
   }
 }
 

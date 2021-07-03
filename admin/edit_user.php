@@ -8,16 +8,16 @@ isNotAdministrator("../pages/login.php");
 require "../helpers/functions.php";
 
 //query data admin yang sedang online
-if (isset($_SESSION["username"])) {
-  $ses_username = $_SESSION["username"];
-  $ses_data = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
+if (isset($_SESSION["id"])) {
+  $ses_id = $_SESSION["id"];
+  $ses_data = query("SELECT * FROM tb_users WHERE id = $ses_id")[0];
 }
 
 //ambil data di url
 $id = $_GET['id'];
 
 //query data user yang bersangkutan
-$row = query("SELECT * FROM tb_users WHERE id='$id'")[0];
+$row = query("SELECT * FROM tb_users WHERE id=$id")[0];
 
 //apabila user telah selesai mengubah data di form
 if(isset($_POST["submit"])) {
@@ -118,7 +118,7 @@ if(isset($_POST["submit"])) {
                   aria-expanded="false">
                   <img src="../img/<?= $ses_data['userimg'] ?>" class="rounded-pill" width="30" height="30"
                     alt="User Profile Image">
-                  <span><?= $ses_data['username'] ?></span>
+                  <span><?= $ses_data['id'] ?></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
                   <li class="d-block"><a href="../pages/profile.php" class="dropdown-item text-reset">Your Profile</a>
