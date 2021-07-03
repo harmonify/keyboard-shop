@@ -9,7 +9,7 @@ require "../helpers/functions.php";
 //query data user yang sedang online
 if (isset($_SESSION["username"])) {
   $ses_username = $_SESSION["username"];
-  $row = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
+  $ses_data = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
 }
 
 ?>
@@ -104,9 +104,9 @@ if (isset($_SESSION["username"])) {
               <li class="d-block d-lg-none nav-item dropdown me-5">
                 <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown1" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  <img src="../img/<?= $row['userimg'] ?>" class="rounded-pill" width="30" height="30"
+                  <img src="../img/<?= $ses_data['userimg'] ?>" class="rounded-pill" width="30" height="30"
                     alt="User Profile Image">
-                  <span><?= $row['username'] ?></span>
+                  <span><?= $ses_data['username'] ?></span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown1">
                   <li class="d-block"><a href="profile.php" class="dropdown-item text-reset">Your Profile</a></li>
@@ -137,9 +137,9 @@ if (isset($_SESSION["username"])) {
             <div class="d-none d-lg-block nav-item dropdown">
               <a class="dropdown-toggle text-decoration-none" href="#" id="dropdown2" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                <img src="../img/<?= $row['userimg'] ?>" class="rounded-pill" width="30" height="30"
+                <img src="../img/<?= $ses_data['userimg'] ?>" class="rounded-pill" width="30" height="30"
                   alt="User Profile Image">
-                <span><?= $row['username'] ?></span>
+                <span><?= $ses_data['username'] ?></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdown2">
                 <li><a href="profile.php" class="dropdown-item text-reset mb-2">Your Profile</a></li>
