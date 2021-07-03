@@ -132,16 +132,19 @@ function editUser($data) {
 	  };
   }
 
-  //cek apakah user memasukkan password lama dengan benar
-  $userpass_old_db = query("SELECT userpass FROM tb_users WHERE id = $id")[0]["userpass"];
+  //jika bukan administrator
+  if (!(isset($_SESSION["administrator"]))) {
+    //cek apakah user memasukkan password lama dengan benar
+    $userpass_old_db = query("SELECT userpass FROM tb_users WHERE id = $id")[0]["userpass"];
 
-  //apabila salah
-  if (!(password_verify($userpass_old, $userpass_old_db))) {
-    echo '<script>
-            alert("Password Anda salah!");
-            document.location.href = "index.php";
-          </script>';
-    return false;
+    //apabila salah
+    if (!(password_verify($userpass_old, $userpass_old_db))) {
+      echo '<script>
+              alert("Password Anda salah!");
+              document.location.href = "index.php";
+            </script>';
+      return false;
+    }
   }
 
   //cek apakah user mengganti password atau tidak

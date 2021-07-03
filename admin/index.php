@@ -214,7 +214,7 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
     <!-- Tabel Data User -->
     <div class="row table-responsive w-100 bg-light rounded-3 shadow-lg">
       <table class="table table-striped caption-top border-bottom shadow shadow-lg">
-        <caption class="ps-3">Show <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> users of
+        <caption class="ps-3">Rows <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> of
           <?= $data_total ?> users.</caption>
         <thead>
           <th scope="col">#</th>

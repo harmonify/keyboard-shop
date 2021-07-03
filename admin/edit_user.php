@@ -188,7 +188,7 @@ if(isset($_POST["submit"])) {
 
       <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-100 px-lg-5">
       <input type="hidden" name="id" value="<?= $row["id"] ?>">
-      <input type="hidden" name="userpass_old" value="<?= $row["userpass"] ?>">
+      <input type="hidden" name="userpass_old" value="">
       <input type="hidden" name="userimg_old" value="<?= $row["userimg"] ?>">
         <div class="mb-3">
           <label for="formName" class="form-label">Username</label>
@@ -196,7 +196,7 @@ if(isset($_POST["submit"])) {
             value="<?= $row["username"] ?>" required>
         </div>
         <div class="mb-3">
-          <label for="formPassword" class="form-label">Password</label>
+          <label for="formPassword" class="form-label">New Password</label>
           <input type="password" class="form-control form-control-lg" id="formPassword" name="userpass"
             placeholder="••••••••">
         </div>
