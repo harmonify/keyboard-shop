@@ -182,11 +182,11 @@ if(isset($_POST["submit"])) {
         <h1 class="display-2">Edit User Profile</h1>
       </div>
 
-      <div class="mb-5" class="project-tile">
-        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle project-image" style="width: 15rem; height: 15rem;">
+      <div class="mb-5 d-flex align-items-center justify-content-center">
+        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="height: 15rem; width: 15rem;">
       </div>
 
-      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
+      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-100 px-lg-5">
       <input type="hidden" name="id" value="<?= $row["id"] ?>">
       <input type="hidden" name="userpass_old" value="<?= $row["userpass"] ?>">
       <input type="hidden" name="userimg_old" value="<?= $row["userimg"] ?>">

@@ -214,13 +214,13 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
     <!-- Tabel Data User -->
     <div class="row w-100 bg-light rounded-3 shadow-lg">
       <table class="table table-striped caption-top border-bottom shadow shadow-lg">
-        <caption>Row <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> of <?= $data_total ?> users.</caption>
+        <caption class="ps-3">Row <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> of <?= $data_total ?> users.</caption>
         <thead>
           <th scope="col">#</th>
           <th scope="col">Username</th>
-          <th scope="col">Password</th>
-          <th scope="col">Profile Picture</th>
-          <th scope="col">Role User</th>
+          <th scope="col" class="d-none d-lg-block">Password</th>
+          <th scope="col" class="d-none d-lg-block">Profile Picture</th>
+          <th scope="col" class="d-none d-lg-block">Role User</th>
           <th scope="col">Action</th>
         </thead>
         <tbody>
@@ -229,10 +229,10 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
           <tr>
             <th scope="row"><?= $i+$page_first_data ?></th>
             <td><?= $row["username"] ?></td>
-            <td>••••••••</td>
-            <td><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
+            <td class="d-none d-lg-block">••••••••</td>
+            <td class="d-none d-lg-block"><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
                 height="50" alt="User image"></td>
-            <td><?= $row["userrole"] ?></td>
+            <td class="d-none d-lg-block"><?= $row["userrole"] ?></td>
             <td>
               <!-- Tombol Edit User -->
               <a href="edit_user.php?id=<?= $row["id"] ?>" class="text-decoration-none">

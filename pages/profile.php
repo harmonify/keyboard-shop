@@ -179,16 +179,16 @@ if (isset($_SESSION["username"])) {
         <h1 class="display-2">Profile</h1>
       </div>
 
-      <div class="mb-5">
-        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="width: 15rem; height: 15rem;">
+      <div class="mb-5 d-flex align-items-center justify-content-center">
+        <img src="../img/<?= $ses_data["userimg"] ?>" class="rounded-circle" style="height: 15rem; width: 15rem;">
       </div>
 
       <div class="mb-5">
-        <h2 class="display-3">Username: <?= $row["username"] ?></h2>
+        <h2 class="display-3">Username: <?= $ses_data["username"] ?></h2>
       </div>
 
       <div class="mb-5">
-        <h2 class="display-3">Role: <?= $row["userrole"] ?></h2>
+        <h2 class="display-3">Role: <?= $ses_data["userrole"] ?></h2>
       </div>
 
     </div>

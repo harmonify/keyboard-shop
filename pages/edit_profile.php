@@ -192,17 +192,17 @@ if(isset($_POST["submit"])) {
         <h1 class="display-2">Edit Profile</h1>
       </div>
 
-      <div class="mb-5">
-        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="width: 15rem; height: 15rem;">
+      <div class="mb-5 d-flex align-items-center justify-content-center">
+        <img src="../img/<?= $ses_data["userimg"] ?>" class="rounded-circle" style="height: 15rem; width: 15rem;">
       </div>
 
-      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
-        <input type="hidden" name="id" value="<?= $row["id"] ?>">
-        <input type="hidden" name="userrole" value="<?= $row["userrole"] ?>">
+      <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-100 px-lg-5">
+        <input type="hidden" name="id" value="<?= $ses_data["id"] ?>">
+        <input type="hidden" name="userrole" value="<?= $ses_data["userrole"] ?>">
         <div class="mb-4">
           <label for="formName" class="form-label">Your Username</label>
           <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example"
-            value="<?= $row["username"]; ?>" required>
+            value="<?= $ses_data["username"]; ?>" required>
         </div>
         <div class="mb-4">
           <label for="formPassword" class="form-label">Your Password</label>
