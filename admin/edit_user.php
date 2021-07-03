@@ -86,7 +86,7 @@ if(isset($_POST["submit"])) {
           <nav class="collapse navbar-collapse justify-content-lg-center col-7 ps-3" id="navbar">
             <ul class="navbar-nav mb-2 mb-sm-0" id="menu">
               <li class="nav-item me-lg-4">
-                <a class="nav-link fs-5" aria-current="page" href="#">
+                <a class="nav-link fs-5" aria-current="page" href="index.php">
                   <i class="bi bi-speedometer2"></i>
                   <span>Dashboard</span>
                 </a>
@@ -176,11 +176,14 @@ if(isset($_POST["submit"])) {
         <h1 class="display-2">Edit User Profile</h1>
       </div>
 
-      <div class="mb-5">
-        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle" style="width: 15rem; height: 15rem;">
+      <div class="mb-5" class="project-tile">
+        <img src="../img/<?= $row["userimg"] ?>" class="rounded-circle project-image" style="width: 15rem; height: 15rem;">
       </div>
 
       <form action="" method="post" enctype="multipart/form-data" class="text-start align-self-center w-75">
+      <input type="hidden" name="id" value="<?= $row["id"] ?>">
+      <input type="hidden" name="userpass_old" value="<?= $row["userpass"] ?>">
+      <input type="hidden" name="userimg_old" value="<?= $row["userimg"] ?>">
         <div class="mb-3">
           <label for="formName" class="form-label">Username</label>
           <input type="text" class="form-control form-control-lg" id="formName" name="username" placeholder="Example"

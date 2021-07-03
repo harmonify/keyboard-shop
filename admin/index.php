@@ -13,8 +13,26 @@ if (isset($_SESSION["username"])) {
   $row = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
 }
 
-//query semua data dari tb_users
-$users = query("SELECT * FROM tb_users");
+
+/* Pagination */
+$data_per_page = 5;
+$data_total = count(query("SELECT * FROM tb_users"));
+$page_total = ceil($data_total / $data_per_page);
+
+
+//halaman yg sedang aktif
+$page_active = isset($_GET["page"]) ? $_GET["page"] : 1;
+
+
+//data awal yg tampil pada halaman yang sedang aktif
+$page_first_data = ($data_per_page * $page_active) - $data_per_page;
+
+
+//query semua data dari tb_users dengan limit per halaman sebanyak $data_per_page
+$users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
+
+/* /Pagination */
+
 
 ?>
 
@@ -48,6 +66,11 @@ $users = query("SELECT * FROM tb_users");
     background-repeat: no-repeat;
     background-size: cover;
     scroll-behavior: smooth;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
   }
 
 </style>
@@ -154,20 +177,42 @@ $users = query("SELECT * FROM tb_users");
   </header>
   <!-- /Header -->
 
-  <!-- Tabel Data User -->
-  <div class="min-vh-100 container p-5 d-flex flex-column align-content-center w-75">
-    <div class="row mb-3">
-      <!-- Tombol tambah user -->
-      <a href="add_user.php" class="btn btn-primary col-3">
-        <i class="bi bi-plus-lg me-3"></i>
-        <span>Tambah Data User</span>
-      </a>
-      <!-- Cari data user -->
-      <form>
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      </form>
-    </div>
-    <div class="row w-75 bg-light rounded-3 shadow-lg">
+  <main class="min-vh-100 container p-5 d-flex flex-column align-content-center">
+
+    <!-- Navigation -->
+    <nav class="ps-n5">
+      <ul class="pagination">
+        <!-- Tombol Previous -->
+        <?php ($page_active > 1) ? $isOne = "" : $isOne = "disabled"; ?>
+        <li class="page-item <?= $isOne ?>">
+          <a class="page-link" href="?page=<?= $page_active-1 ?>">
+            &laquo;
+          </a>
+        </li>
+
+        <!-- Pages -->
+        <?php for($i = 1; $i <= $page_total; $i++) : ?>
+        <?php ($i == $page_active) ? $isActive = "active" : $isActive = "" ; ?>
+        <li class="page-item <?= $isActive ?>">
+          <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+        </li>
+        <?php endfor; ?>
+
+        <!-- Tombol Next -->
+        <?php ($page_active < $page_total) ? $isLast = "" : $isLast = "disabled"; ?>
+        <li class="page-item <?= $isLast ?>">
+          <a class="page-link" href="?page=<?= $page_active+1 ?>">
+            &raquo;
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+    <!-- /Navigation -->
+
+
+    <!-- Tabel Data User -->
+    <div class="row w-100 bg-light rounded-3 shadow-lg">
       <table class="table table-striped border-bottom shadow">
         <thead>
           <th scope="col">#</th>
@@ -181,7 +226,7 @@ $users = query("SELECT * FROM tb_users");
           <?php $i = 1; ?>
           <?php foreach($users as $row) : ?>
           <tr>
-            <th scope="row"><?= $i ?></th>
+            <th scope="row"><?= $i+$page_first_data ?></th>
             <td><?= $row["username"] ?></td>
             <td>••••••••</td>
             <td><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
@@ -204,8 +249,9 @@ $users = query("SELECT * FROM tb_users");
         </tbody>
       </table>
     </div>
-  </div>
-  <!-- /Tabel Data User -->
+    <!-- /Tabel Data User -->
+
+  </main>
 
   <!-- Footer -->
   <footer class="container-fluid py-5 text-white position-relative bottom-0 fixed-bottom"
