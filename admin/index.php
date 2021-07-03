@@ -213,7 +213,8 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
 
     <!-- Tabel Data User -->
     <div class="row w-100 bg-light rounded-3 shadow-lg">
-      <table class="table table-striped border-bottom shadow">
+      <table class="table table-striped caption-top border-bottom shadow shadow-lg">
+        <caption>Row <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> of <?= $data_total ?> users.</caption>
         <thead>
           <th scope="col">#</th>
           <th scope="col">Username</th>

@@ -121,12 +121,14 @@ function editUser($data) {
   //cek apakah user lain telah menggunakan username ini atau belum
 	$result = query("SELECT id, username FROM tb_users WHERE username = '$username'");
 
-	if($id !== $result[0]["id"]) {
-		echo "<script>
-				alert('username sudah terdaftar!')
-		      </script>";
-		return false;
-	};
+	if($result){
+    if($id !== $result[0]["id"]) {
+	  	echo "<script>
+			      	alert('username sudah terdaftar!')
+		        </script>";
+		  return false;
+	  };
+  }
 
   //cek apakah user mengganti password atau tidak
   if (empty($userpass) && empty($userpass_confirm)) {
@@ -203,13 +205,6 @@ function delRole($data) {
   //mengembalikan status query
 	return mysqli_affected_rows($conn);
 }
-
-
-
-function pagination() {
-  
-}
-
 
 
 /***** AKHIR FUNGSI ADMINISTRATOR *****/
