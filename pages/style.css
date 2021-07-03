@@ -143,11 +143,11 @@ html {
   }
 
   .project-tile-lg {
-    width: 26rem;
+    width: 21rem;
   }
 
   .project-image {
-    width: 26rem;
+    width: 21rem;
     object-fit: cover;
     object-position: center;
   }
