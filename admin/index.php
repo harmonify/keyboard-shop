@@ -8,9 +8,9 @@ isNotAdministrator("../pages/login.php");
 require "../helpers/functions.php";
 
 //query data admin yang sedang online
-if (isset($_SESSION["username"])) {
-  $ses_username = $_SESSION["username"];
-  $ses_data = query("SELECT * FROM tb_users WHERE username = '$ses_username'")[0];
+if (isset($_SESSION["id"])) {
+  $ses_id = $_SESSION["id"];
+  $ses_data = query("SELECT * FROM tb_users WHERE id = '$ses_id'")[0];
 }
 
 
@@ -212,28 +212,24 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
 
 
     <!-- Tabel Data User -->
-    <div class="row w-100 bg-light rounded-3 shadow-lg">
+    <div class="row table-responsive w-100 bg-light rounded-3 shadow-lg">
       <table class="table table-striped caption-top border-bottom shadow shadow-lg">
-        <caption class="ps-3">Row <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> of <?= $data_total ?> users.</caption>
+        <caption class="ps-3">Show <?= $page_first_data+1 ?>-<?= $page_first_data+$data_per_page ?> users of
+          <?= $data_total ?> users.</caption>
         <thead>
           <th scope="col">#</th>
+          <th scope="col" class="order-first order-lg-last">Action</th>
           <th scope="col">Username</th>
-          <th scope="col" class="d-none d-lg-block">Password</th>
-          <th scope="col" class="d-none d-lg-block">Profile Picture</th>
-          <th scope="col" class="d-none d-lg-block">Role User</th>
-          <th scope="col">Action</th>
+          <th scope="col">Password</th>
+          <th scope="col">Profile Picture</th>
+          <th scope="col">Role User</th>
         </thead>
         <tbody>
           <?php $i = 1; ?>
           <?php foreach($users as $row) : ?>
           <tr>
             <th scope="row"><?= $i+$page_first_data ?></th>
-            <td><?= $row["username"] ?></td>
-            <td class="d-none d-lg-block">••••••••</td>
-            <td class="d-none d-lg-block"><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
-                height="50" alt="User image"></td>
-            <td class="d-none d-lg-block"><?= $row["userrole"] ?></td>
-            <td>
+            <td class="order-first order-lg-last">
               <!-- Tombol Edit User -->
               <a href="edit_user.php?id=<?= $row["id"] ?>" class="text-decoration-none">
                 <i class="bi bi-pencil-square text-primary fs-4"></i>
@@ -244,6 +240,11 @@ $users = query("SELECT * FROM tb_users LIMIT $page_first_data, $data_per_page");
                 <i class="bi bi-trash-fill text-danger fs-4"></i>
               </a>
             </td>
+            <td><?= $row["username"] ?></td>
+            <td>••••••••</td>
+            <td><img src='../img/<?= $row["userimg"] ?>' class="d-block rounded-circle mx-4 text-center" width="50"
+                height="50" alt="User image"></td>
+            <td><?= $row["userrole"] ?></td>
           </tr>
           <?php $i++; ?>
           <?php endforeach; ?>

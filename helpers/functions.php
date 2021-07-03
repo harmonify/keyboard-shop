@@ -106,12 +106,14 @@ function editUser($data) {
 
   //tangkap data
   $id = $data["id"];
+  $userpass_old = mysqli_real_escape_string($conn, $data["userpass_old"]);
+  $userimg_old = $data["userimg_old"];
+
   $username = htmlspecialchars($data["username"]);
-  $userpass_old = $data["userpass_old"];
   $userpass = mysqli_real_escape_string($conn, $data["userpass"]);
   $userpass_confirm = mysqli_real_escape_string($conn, $data["userpass_confirm"]);
-  $userimg_old = $data["userimg_old"];
   $userrole = $data["userrole"];
+
 
   //cek username valid
   if (empty(trim($username))) {
@@ -130,13 +132,25 @@ function editUser($data) {
 	  };
   }
 
+  //cek apakah user memasukkan password lama dengan benar
+  $userpass_old_db = query("SELECT userpass FROM tb_users WHERE id = $id")[0]["userpass"];
+
+  //apabila salah
+  if (!(password_verify($userpass_old, $userpass_old_db))) {
+    echo '<script>
+            alert("Password Anda salah!");
+            document.location.href = "index.php";
+          </script>';
+    return false;
+  }
+
   //cek apakah user mengganti password atau tidak
   if (empty($userpass) && empty($userpass_confirm)) {
     $userpass = $userpass_old;
     $userpass_confirm = $userpass_old;
   }
 
-  //cek apakah user sudah memasukkan password dengan benar
+  //cek apakah user memasukkan password baru dengan benar
   if ($userpass !== $userpass_confirm) {
     echo '<script>
             alert("Konfirmasi password tidak sesuai");
