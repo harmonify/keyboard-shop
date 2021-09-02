@@ -1,11 +1,7 @@
 <?php
-//cek sesi dan cek role user
-require_once "../helpers/check.php";
+require_once '../../../helpers/bootstrap.php';
 
-isNotLoggedIn("../pages/login.php");
-isNotAdministrator("../pages/login.php");
-
-require "../helpers/functions.php";
+$admin = adminAuth();
 
 //ambil id user dri url
 $id = $_GET["id"];

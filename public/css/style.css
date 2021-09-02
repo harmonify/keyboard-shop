@@ -7,7 +7,6 @@ body {
 }
 
 
-
 /*
  * Custom translucent site header
  */
@@ -21,7 +20,6 @@ body {
   color: #fff;
   text-decoration: none;
 }
-
 
 
 /*
@@ -197,6 +195,34 @@ html {
 }
 
 
+/* 
+ * Form
+ */
+ .form-login {
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-login .checkbox {
+  font-weight: 400;
+}
+
+.form-login .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-login input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-login input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
 /*
  * Form Animation
@@ -218,6 +244,9 @@ html {
 /*
  * Extra utilities
  */
+.bg-eigengrau {
+  background-color: #16161d;
+}
 
 .flex-equal>* {
   flex: 1;

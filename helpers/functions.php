@@ -1,6 +1,8 @@
 <?php
+
 /* Connect ke database */
-$conn = new mysqli("localhost", "root", "", "db_finalproject");
+$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
 if($conn->connect_error) {
   trigger_error('Koneksi ke database gagal: ' .$conn->connect_error, E_USER_ERROR);
 }
@@ -68,20 +70,21 @@ function addUser($data) {
 
 /* Fungsi Untuk Mengupload Gambar */
 function upload() {
-  //tangkap file data
+  // tangkap file data dan tambahkan timestamp
   $userimg_name = htmlspecialchars($_FILES["userimg"]["name"]);
+  $userimg_name = preg_replace("/\.jpg/", "_".date('dmYHiu').".jpg", $userimg_name);
+
   $userimg_tmp = htmlspecialchars($_FILES["userimg"]["tmp_name"]);
 
-  //ubah value $userimg menjadi default apabila user tidak menambahkan foto
+  // ubah value $userimg menjadi default apabila user tidak menambahkan foto
   if(!(is_uploaded_file($userimg_tmp))){
     return "default_user_img.png";
   }
-  //cek apakah file belum ada dalam folder img
-  else if(!(file_exists("../img/".$userimg_name))){
-    move_uploaded_file($userimg_tmp, "../img/".$userimg_name);
-  }
 
-  //kembalikan string nama gambar
+  // upload
+  move_uploaded_file($userimg_tmp, ROOT_DIR.'/public/img/'.$userimg_name);
+
+  // kembalikan string nama gambar
   return $userimg_name;
 }
 
@@ -91,10 +94,18 @@ function upload() {
 function delUser($id) {
 	global $conn;
 
-  //hapus data user
+  $user = query("SELECT * FROM tb_users WHERE id=$id")[0];
+
+  // hapus gambar user
+  if ($user['userimg'] !== "default_user_img.png") {
+    $file_pointer = ROOT_DIR."/public/img/{$user['userimg']}";
+    unlink($file_pointer);
+  }
+  
+  // hapus data user
 	$conn->query("DELETE FROM tb_users WHERE id=$id");
 
-  //mengembalikan status query
+  // mengembalikan status query
 	return mysqli_affected_rows($conn);
 }
 
@@ -141,7 +152,7 @@ function editUser($data) {
     if (!(password_verify($userpass_old, $userpass_old_db))) {
       echo '<script>
               alert("Password Anda salah!");
-              document.location.href = "index.php";
+              document.location.href = '.PUBLIC_DIR.'"pages/index.php";
             </script>';
       return false;
     }
@@ -157,7 +168,7 @@ function editUser($data) {
   if ($userpass !== $userpass_confirm) {
     echo '<script>
             alert("Konfirmasi password tidak sesuai");
-            document.location.href = "index.php";
+            document.location.href = '.PUBLIC_DIR.'"pages/index.php";
           </script>';
     return false;
   }
@@ -258,7 +269,7 @@ function registerUser($data) {
   if ($userpass !== $userpass_confirm) {
     echo '<script>
             alert("Konfirmasi password tidak sesuai");
-            document.location.href = "index.php";
+            document.location.href = '.PUBLIC_DIR.'"index.php";
           </script>';
     return false;
   }
