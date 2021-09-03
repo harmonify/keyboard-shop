@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2021 at 10:45 AM
+-- Generation Time: Sep 02, 2021 at 09:20 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_finalproject`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_roles`
+--
+
+CREATE TABLE `tb_roles` (
+  `roleid` int(11) NOT NULL,
+  `rolename` varchar(50) NOT NULL,
+  `roleby` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_roles`
+--
+
+INSERT INTO `tb_roles` (`roleid`, `rolename`, `roleby`) VALUES
+(1, 'user', 'admin'),
+(2, 'administrator', 'admin'),
+(4, 'developer', 'admin2');
 
 -- --------------------------------------------------------
 
@@ -41,23 +62,29 @@ CREATE TABLE `tb_users` (
 
 INSERT INTO `tb_users` (`id`, `username`, `userpass`, `userimg`, `userrole`) VALUES
 (1, 'admin', '$2y$10$w/RhD/jDR0H7Y3cE07e5CubJe0JNBw9slKh9OCLLbsLrGevcZwCB.', 'default_user_img.png', 'administrator'),
-(2, 'wendy', '$2y$10$FbLIolIbJffgKPOmKZUKpuxcFHb5AV2TL3WlGOaNPZWp9vPf6H0O.', 'keyboard10.jpg', 'user'),
+(2, 'wendy', '$2y$10$/Gsl2zmvMWDTgxpuqu8cG.4itEEgxWFpXXpI.bj3PSlk6v8d3AnqO', 'keyboard1.jpg', 'user'),
 (3, 'admin2', '$2y$10$z8fUE/gIO00FyEeTbnx9AOzZr25hQr6JsO88xDWKOtW5NkSYnwRiu', 'keyboard1.jpg', 'administrator'),
-(4, 'ryan', '$2y$10$FnWgCFsd.QNl.EnB6UAWbuCgtV2FVAPIc.Gr.ONsPvvB3wEOGfwhe', 'keyboard11.jpg', 'user'),
-(5, 'bian', '$2y$10$itZD1GUrf7dW9RCIzDgKAe023HcXl6/lJJ/W2qDMYAsXov/IuEyMG', 'default_user_img.png', 'user'),
-(6, 'asdf', '$2y$10$e5Ax1rAsOVyt4ygvvbtrnOJg1eY2ii.6WbFP0TKH61k2KbJSCGKMy', 'default_user_img.png', 'administrator'),
-(7, 'jekyll', '$2y$10$cVCS8chBK6nge0qxso8zs.Y5VX/lm2zdSqh6pUHN7k3A1ee9rECP2', 'keyboard4.jpg', 'user'),
-(8, 'deyy', '$2y$10$JBrQRWEtnOOMKTwvlzpyueHR8XmaC.mpZgF9.VcC9Dw9XYrsGS19G', 'keyboard6.jpg', 'administrator'),
-(9, 'eyy', '$2y$10$S/9T4W3zPf.snoa8I51aU.FJX.VhsoDm77xATdKrYBZQW07pDL9tm', 'keyboard7.jpg', 'user'),
-(10, 'fff', '$2y$10$ih3LMjBXKg2SmTm4pf7baOYg.yL0bKzHdMRe7oUFM4W7IuTnOha0G', 'keyboard10.jpg', 'user'),
-(11, 'gell', '$2y$10$bwuFIwYfcpwonmTPgOJnyeRdu4tI3Vd0o/qMWtT2LeUybmuS0dnEO', 'keyboard2.jpg', 'administrator'),
+(4, 'ryan', '$2y$10$ADQQuMGRLtLGf1QG.LpRiubDHvj.SHvH5qGPGPReNkF8/DZYTh1ia', 'keyboard5_020920212043000000.jpg', 'administrator'),
 (12, 'harley', '$2y$10$cejsh/ifCqCjTIKiJbmLg.zaJ7wMDshUzF445O8K79RHP4X1zSDgW', 'keyboard9.jpg', 'user'),
 (13, 'ian', '$2y$10$QPkAhlVv9O.lDw64qe97Rua3im99.NxDvqIPkLX2kyBg.HHdJCGeO', 'keyboard8.jpg', 'user'),
-(14, 'jean', '$2y$10$5pwBMzf0sg2VRyFu3Sdo.OcFlWCrIoQR94tut.g8gcQ.F4lSCe.qO', 'keyboard5.jpg', 'user');
+(14, 'jean', '$2y$10$5pwBMzf0sg2VRyFu3Sdo.OcFlWCrIoQR94tut.g8gcQ.F4lSCe.qO', 'keyboard5.jpg', 'user'),
+(20, 'well', '$2y$10$ixx/CBInxSiUzI7/azC8xuBFX.ZuJOLjSz0c19Dt6ItAUoIeMH0Km', 'AbsoluteAnxiousHyracotherium-mobile020920212036000000.jpg', 'administrator'),
+(21, 'wellplayed', '$2y$10$tkXW8c8Pvs.daDVWrl1bbeyFew.CqCR.A5U71l76T32Iixq17J3cS', 'AbsoluteAnxiousHyracotherium-mobile020920212036000000.jpg', 'user'),
+(22, 'hmm', '$2y$10$cooY0TKJZBAnBIOIFfBbTudINN9Oo.uLrI3.14/y8tom4M4ukLLlG', 'keyboard3020920212037000000.jpg', 'user'),
+(23, 'humu', '$2y$10$ADMhCZRMcXqFYNRwii1xGOjcMCbnXN4YDPXhJlCqEg5u7DDNNRVU2', 'default_user_img.png', 'user'),
+(24, 'mana', '$2y$10$y.Opsq1lLd/0VI.kUfXPnuj5PoNR9rbfU76WDa7qvXIgiT1hn3XV.', 'keyboard1020920212040000000.jpg', 'user'),
+(25, 'yup', '$2y$10$CN8XzityB7uNfBcgUKrqxuzb1AFjYKNkSRkThH591GoEiyuK1NciG', 'keyboard2_020920212041000000.jpg', 'user'),
+(26, 'maan', '$2y$10$GxXK0YOSLSr6MfEJP0XT/uQUWxXisnmryCVrCZJkN0g9r3C8DIMKS', 'keyboard3_020920212042000000.jpg', 'user');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tb_roles`
+--
+ALTER TABLE `tb_roles`
+  ADD PRIMARY KEY (`roleid`);
 
 --
 -- Indexes for table `tb_users`
@@ -70,10 +97,16 @@ ALTER TABLE `tb_users`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_roles`
+--
+ALTER TABLE `tb_roles`
+  MODIFY `roleid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
