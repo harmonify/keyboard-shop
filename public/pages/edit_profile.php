@@ -13,7 +13,7 @@ if(isset($_POST["submit"])) {
   if(editUser($_POST) > 0) {
     echo '<script>
             alert("Profile Berhasil Diganti");
-            // document.location.href = "profile.php";
+            document.location.href = "profile.php";
           </script>';
   } else {
     echo '<script>
