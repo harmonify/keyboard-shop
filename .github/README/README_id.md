@@ -1,4 +1,9 @@
-# Harmonikeys
+<div align="center">
+  
+  # Harmonikeys
+</div>
+
+![thumbnail](https://github.com/harmonify/keyboard-shop/blob/main/.github/img/index-page.png)
 The documentation is available in English. [README.md](https://github.com/harmonify/keyboard-shop/blob/main/README.md)
 ## Pendahuluan
 Harmonikeys merupakan sebuah aplikasi web e-commerce yang dibuat untuk memenuhi tugas akhir mata kuliah Pemrograman Web dan Web Service dengan menggunakan komponen-komponen sebagai berikut.
