@@ -1,5 +1,10 @@
-# Harmonikeys
-The documentation is available in Indonesian. [README_id.md](https://github.com/harmonify/keyboard-shop/blob/main/README_id.md)
+<div align="center">
+  
+  # Harmonikeys
+</div>
+
+![thumbnail](https://github.com/harmonify/keyboard-shop/blob/main/.github/img/index-page.png)
+The documentation is available in Indonesian. [README_id.md](https://github.com/harmonify/keyboard-shop/blob/main/.github/README/README_id.md)
 ## Introduction
 Harmonikeys is an e-commerce web application created to fulfill the final project of the Web Programming and Web Service course by using the following components.
 * PHP 8.0.6
